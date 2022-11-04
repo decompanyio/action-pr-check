@@ -16,6 +16,7 @@ export function run() {
       break;
     }
   }
+  asdfsdf;
 
   if (!check) {
     const octokit = github.getOctokit(token);
