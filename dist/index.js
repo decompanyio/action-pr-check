@@ -9705,12 +9705,12 @@ const github = __nccwpck_require__(5438);
 
 function run() {
   // input
-  const branch = core.getInput('branch');
+  const branch = core.getInput('branch').toLowerCase();
   const token = core.getInput('token');
 
   // var
   const allowPrefixList = ['feature/', 'fix/', 'seo/', 'refactor/', 'hotfix/', 'ci/', 'dependabot/'];
-  const check = false;
+  let check = false;
 
   for (let allowPrefix in allowPrefixList) {
     if (branch.startsWith(allowPrefix)) {
