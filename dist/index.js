@@ -9714,6 +9714,7 @@ function run() {
 
   for (let allowPrefix in allowPrefixList) {
     if (branch.startsWith(allowPrefix)) {
+      console.log('check:', branch.startsWith(allowPrefix), 'branch:', branch, 'prefix:', allowPrefix);
       check = true;
       break;
     }
