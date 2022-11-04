@@ -9712,7 +9712,7 @@ function run() {
   const allowPrefixList = ['feature/', 'fix/', 'seo/', 'refactor/', 'hotfix/', 'ci/', 'dependabot/'];
   const check = false;
 
-  for (allowPrefix in allowPrefixList) {
+  for (let allowPrefix in allowPrefixList) {
     if (branch.startsWith(allowPrefix)) {
       check = true;
       break;
