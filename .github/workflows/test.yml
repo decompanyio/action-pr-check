@@ -18,5 +18,4 @@ jobs:
       - name: Test this action
         uses: ./
         with:
-          branch: ${{ github.ref_name }}
           token: ${{ secrets.GITHUB_TOKEN }}

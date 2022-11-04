@@ -1,9 +1,6 @@
 name: 'action-pr-check'
 description: 'action-pr-check'
 inputs:
-  branch:
-    description: 'Current branch name'
-    required: true
   token:
     description: 'Github Token'
     required: true

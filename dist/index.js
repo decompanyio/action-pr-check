@@ -9705,16 +9705,16 @@ const github = __nccwpck_require__(5438);
 
 function run() {
   // input
-  const branch = core.getInput('branch').toLowerCase();
+  const branch = github.context.payload.pull_request.head.ref.toLowerCase();
   const token = core.getInput('token');
 
   // var
   const allowPrefixList = ['feature/', 'fix/', 'seo/', 'refactor/', 'hotfix/', 'ci/', 'dependabot/'];
   let check = false;
 
-  for (let allowPrefix in allowPrefixList) {
-    if (branch.startsWith(allowPrefix)) {
-      console.log('check:', branch.startsWith(allowPrefix), 'branch:', branch, 'prefix:', allowPrefix);
+  for (let i = 0; i < allowPrefixList.length; i++) {
+    if (branch.startsWith(allowPrefixList[i])) {
+      console.log('check:', branch.startsWith(allowPrefixList[i]), 'branch:', branch, 'prefix:', allowPrefixList[i]);
       check = true;
       break;
     }
@@ -9722,7 +9722,7 @@ function run() {
 
   if (!check) {
     const octokit = github.getOctokit(token);
-    const issue = github.context.issue();
+    const issue = github.context.issue;
     const comment = `PR Title must be started with: ${allowPrefixList}`;
 
     octokit.rest.issues.createComment({
