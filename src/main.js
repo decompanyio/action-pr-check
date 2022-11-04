@@ -3,13 +3,17 @@ const github = require('@actions/github');
 
 export function run() {
   // input
-  const branch = github.context.payload.pull_request.head.ref.toLowerCase();
   const token = core.getInput('token');
 
   // var
-  const allowPrefixList = ['feature/', 'fix/', 'seo/', 'refactor/', 'hotfix/', 'ci/', 'dependabot/'];
-  let check = false;
+  const branch = github.context.payload.pull_request.head.ref.toLowerCase();
+  const allowPrefixList = ['feature/', 'refactor/', 'fix/', 'hotfix/', 'ci/', 'dependabot/'];
 
+  if (github.context.payload.repository.name === 'polarishare-frontend-2022') {
+    allowPrefixList.push('seo/');
+  }
+
+  let check = false;
   for (let i = 0; i < allowPrefixList.length; i++) {
     if (branch.startsWith(allowPrefixList[i])) {
       console.log('check:', branch.startsWith(allowPrefixList[i]), 'branch:', branch, 'prefix:', allowPrefixList[i]);
