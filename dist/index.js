@@ -9729,7 +9729,7 @@ function run() {
       owner: issue.owner,
       repo: issue.repo,
       issue_number: issue.number,
-      body: comment,
+      body: `@${github.context.actor}\n${comment}`,
     });
 
     core.setFailed(comment);
