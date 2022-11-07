@@ -15,6 +15,19 @@ jobs:
       - name: Checkout source code.
         uses: actions/checkout@v3
 
+      - name: Setup node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - uses: actions/cache@v3
+        id: cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-nodemodules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-nodemodules-
+
       - name: yarn
         run: yarn
 
