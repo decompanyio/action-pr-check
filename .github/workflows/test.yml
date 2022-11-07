@@ -9,64 +9,11 @@ permissions:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     if: ${{ github.actor != 'dependabot[bot]' }}
     steps:
       - name: Checkout source code.
         uses: actions/checkout@v3
-
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-
-      - run: npm i -g yarn
-
-      - uses: actions/checkout@v3
-        with:
-          repository: choshsh/choshsh-ui
-          path: .test
-
-      - working-directory: .test/front-end
-        run: yarn
-
-      - working-directory: .test/front-end
-        run: yarn build
-
-      - uses: actions/setup-java@v3
-        with:
-          distribution: 'corretto'
-          java-version: '17'
-
-      - uses: actions/cache@v3
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
-
-      - name: Grant execute permission for gradlew
-        working-directory: .test
-        run: chmod +x gradlew
-
-      - name: Test with Gradle
-        working-directory: .test
-        run: ./gradlew clean test
-
-      - uses: actions/cache@v3
-        id: cache
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-nodemodules-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-nodemodules-
-
-      - name: yarn
-        run: yarn
-
-      - name: build
-        run: yarn build
 
       - name: Test this action
         uses: ./
