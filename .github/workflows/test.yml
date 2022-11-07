@@ -21,6 +21,17 @@ jobs:
 
       - run: npm i -g yarn
 
+      - uses: actions/checkout@v3
+        with:
+          repository: choshsh/choshsh-ui
+          path: .test
+
+      - working-directory: .test/front-end
+        run: yarn
+
+      - working-directory: .test/front-end
+        run: yarn build
+
       - uses: actions/cache@v3
         id: cache
         with:
