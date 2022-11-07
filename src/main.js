@@ -25,7 +25,11 @@ export function run() {
   if (!check) {
     const octokit = github.getOctokit(token);
     const issue = github.context.issue;
-    const comment = `PR Title must be started with: ${allowPrefixList}`;
+
+    const comment = `### PR Title must be started with:`;
+    allowPrefixList.forEach((allowPrefix) => {
+      comment += `\n- ${allowPrefix}`;
+    });
 
     octokit.rest.issues.createComment({
       owner: issue.owner,
