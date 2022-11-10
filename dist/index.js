@@ -9712,7 +9712,7 @@ function run() {
   const allowPrefixList = ['feature/', 'refactor/', 'fix/', 'hotfix/', 'ci/', 'dependabot/'];
 
   if (github.context.payload.repository.name === 'polarishare-frontend-2022') {
-    allowPrefixList.push('seo/');
+    allowPrefixList.push('seo/', 'test/');
   }
 
   let check = false;
