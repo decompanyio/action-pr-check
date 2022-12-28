@@ -7,7 +7,7 @@ export function run() {
 
   // var
   const branch = github.context.payload.pull_request.head.ref.toLowerCase();
-  const allowPrefixList = ['feature/', 'refactor/', 'fix/', 'hotfix/', 'ci/', 'dependabot/'];
+  const allowPrefixList = ['feat/', 'refactor/', 'fix/', 'hotfix/', 'ci/', 'dependabot/'];
 
   if (github.context.payload.repository.name === 'polarishare-frontend-2022') {
     allowPrefixList.push('seo/', 'test/');
