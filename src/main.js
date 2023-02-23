@@ -6,7 +6,8 @@ export function run() {
   const token = core.getInput('token');
 
   // var
-  const branch = github.context.payload.pull_request.head.ref.toLowerCase();
+  const head = github.context.payload.pull_request.head.ref.toLowerCase();
+  const base = github.context.payload.pull_request.base.ref.toLowerCase();
   const allowPrefixList = ['feat/', 'refactor/', 'fix/', 'hotfix/', 'ci/', 'docs/', 'dependabot/', 'revert-'];
 
   if (github.context.payload.repository.name === 'polarishare-frontend-2022') {
@@ -14,11 +15,16 @@ export function run() {
   }
 
   let check = false;
-  for (let i = 0; i < allowPrefixList.length; i++) {
-    if (branch.startsWith(allowPrefixList[i])) {
-      console.log('check:', branch.startsWith(allowPrefixList[i]), 'branch:', branch, 'prefix:', allowPrefixList[i]);
-      check = true;
-      break;
+
+  if (base !== 'master') {
+    check = true;
+  } else {
+    for (let i = 0; i < allowPrefixList.length; i++) {
+      if (head.startsWith(allowPrefixList[i])) {
+        console.log('check:', head.startsWith(allowPrefixList[i]), 'branch:', head, 'prefix:', allowPrefixList[i]);
+        check = true;
+        break;
+      }
     }
   }
 
