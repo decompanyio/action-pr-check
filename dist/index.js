@@ -9710,7 +9710,17 @@ function run() {
   // var
   const head = github.context.payload.pull_request.head.ref.toLowerCase();
   const base = github.context.payload.pull_request.base.ref.toLowerCase();
-  const allowPrefixList = ['feat/', 'refactor/', 'fix/', 'hotfix/', 'ci/', 'docs/', 'dependabot/', 'revert-'];
+  const allowPrefixList = [
+    'feat/',
+    'refactor/',
+    'fix/',
+    'release/',
+    'hotfix/',
+    'ci/',
+    'docs/',
+    'dependabot/',
+    'revert-',
+  ];
 
   if (github.context.payload.repository.name === 'polarishare-frontend-2022') {
     allowPrefixList.push('seo/', 'test/');
