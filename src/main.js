@@ -14,11 +14,11 @@ export function run() {
   const headBranch = pullRequest.head.ref.toLowerCase();
   const baseBranch = pullRequest.base.ref.toLowerCase();
   const allowedPrefixes = [
-    'feat/',
+    'feature/',
     'refactor/',
     'fix/',
-    'release/',
     'hotfix/',
+    'release/',
     'ci/',
     'docs/',
     'dependabot/',
